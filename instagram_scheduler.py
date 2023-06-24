@@ -3,9 +3,11 @@ import instagrapi
 from instagrapi import Client
 
 def make_post(photo_path):
-	cl.upload_album(
-		path = photo_path,
-		caption = main_caption + "\n\n Location: #Rotterdam\n Camera: #SonyA6300\n\n @sonyalpha @magnumphotos\n\n" + tags + "Authentic Streets" ## this will use the custom made NN app to generate unique captions
+	global location
+	cl.album_upload(
+		photo_path,
+		caption = main_caption + "\n\n Location: #" + location + "\n Camera: #SonyA6300\n\n @sonyalpha @magnumphotos\n\n" + tags + "Authentic Streets", ## this will use the custom made NN app to generate unique captions
+		location = Location() ######## ADD
 		)
 
 cl = Client()
@@ -17,6 +19,7 @@ cl.login(USERNAME, PASSWORD, verification_code=verification_code)
 print("Access Completed.")
 
 main_caption = input("What is the main caption? ")
+location = input("What is the location? ")
 
 tags = """#streets_storytelling #portrait #portraitphotography #streetclassics #sonyalpha #alphapro
 #adobecreativecrowd #BeAlpha #streetgrammers
@@ -27,6 +30,12 @@ tags = """#streets_storytelling #portrait #portraitphotography #streetclassics #
 #3amchronicles #spicollective
 #creativephotography #streetpeople
 #filmic_streets\n"""
+
+# with open('hashtags.txt', 'r') as file:
+#     hashtags = file.readlines()
+
+# # Clean up the hashtags (remove newline characters)
+# hashtags = [tag.strip() for tag in hashtags]
 
 multiple = input("Are you attaching multiple photos? [Y/N] : ")
 path_list = []
@@ -54,4 +63,7 @@ print(path_list)
 make_post(path_list)
 
 print("Photo Posted.")
+
+print("Logging out...")
+cl.login()
 print("Ending Program.")

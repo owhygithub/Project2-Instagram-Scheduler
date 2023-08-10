@@ -1,8 +1,14 @@
 import maskpass as mask
 import instagrapi
-from tools import *
 from instagrapi import Client
 
+def make_post(photo_path):
+	global location
+	cl.album_upload(
+		photo_path,
+		caption = main_caption + "\n\n Location: #" + location + "\n Camera: #SonyA6300\n\n @sonyalpha @magnumphotos\n\n" + tags + "Authentic Streets", ## this will use the custom made NN app to generate unique captions
+		)
+	
 cl = Client()
 USERNAME = input("USERNAME: ")
 PASSWORD = mask.askpass(prompt ="PASSWORD: ", mask = "*")

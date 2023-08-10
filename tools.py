@@ -1,3 +1,8 @@
+import maskpass as mask
+import instagrapi
+from instagrapi import Client
+
+cl = Client()
 def make_post(photo_path):
 	global location
 	cl.album_upload(
